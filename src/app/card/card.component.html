@@ -1,0 +1,78 @@
+<div class="card" [ngClass]="{'card-bg': editBackground}" (click)="onEditBackground()">
+  <div class="line" [ngClass]="{'line-bg': editBackground}"></div>
+
+  <div>
+    <mat-icon svgIcon="{{ item.icon }}"></mat-icon>
+  </div>
+
+  <div class="basic">
+    <div>
+      <div class="main">
+        <div class="main__title">
+          <div class="title">
+            {{ item.car.name }}
+            <span class="number">{{ item.car.number }}</span>
+            <span class="milage">{{ item.car.milage }}</span>
+          </div>
+        </div>
+
+        <div class="main__subtitle">
+          {{ item.car.model }}
+          <span>{{ item.car.numberModel }}</span>
+        </div>
+
+        <div class="main__text">{{ item.car.year }}</div>
+
+        <div *ngIf="item?.detailed" class="main__footer">
+          <div class="detailed" [ngClass]="{'active': detail, 'active-bg': editBackground && detail}"
+               (click)="getDetail($event)">
+            <mat-icon svgIcon="info"></mat-icon>
+            <span>{{ item.detailed }}</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="buttons">
+
+        <div class="button">
+          <div *ngFor="let btn of item.button">
+            <mat-icon svgIcon="{{ btn }}" (click)="$event.stopPropagation()"></mat-icon>
+          </div>
+        </div>
+
+        <div class="nodes">
+          <div *ngIf="item.knot">
+            <mat-icon svgIcon="unit-5"></mat-icon>
+            <span>{{ item.knot }} узел</span>
+          </div>
+          <div *ngIf="item.sample">
+            <mat-icon svgIcon="sample-4"></mat-icon>
+            <span>{{ item.sample }} пробы</span>
+          </div>
+          <div *ngIf="!item.sample && !item.knot">
+            <span class="add">Добавить узлы</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <mat-expansion-panel *ngIf="item.description"
+                         hideToggle="true"
+                         #panel>
+      <mat-expansion-panel-header [ngClass]="{'active': description, 'active-bg': editBackground && description}"
+                                  (click)="getDescription($event)">
+
+        <mat-panel-description>
+          <mat-icon svgIcon="arrow-down" [ngClass]="{'reverseArrow': panel.expanded}"></mat-icon>
+          <span class="openClose">
+            {{ panel.expanded ? 'Свернуть' : 'Развернуть' }}
+          </span>
+        </mat-panel-description>
+
+      </mat-expansion-panel-header>
+      <p>{{ item.description }}</p>
+    </mat-expansion-panel>
+
+  </div>
+</div>

@@ -1,6 +1,6 @@
 import { Component, Inject, Input, ViewEncapsulation } from '@angular/core';
 
-import { IconsService } from "./icons.service";
+import { IconsService } from "../icons/icons.service";
 import { Card } from "./card.interfase";
 
 @Component({

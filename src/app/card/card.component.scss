@@ -5,17 +5,23 @@ $border: #C4D3E9;
 $active-bg: #CCE7FF;
 $filling-bg: #e8eff8;
 
-@mixin loading($from, $to, $anim) {
+@mixin loading($from, $to, $name) {
   .active {
     background: linear-gradient(to $from, white 50%, $filling-bg 50%) $to;
     background-size: 200%;
-    animation: $anim .4s;
+    animation: $name .4s;
   }
 
   .active-bg {
     background: linear-gradient(to $from, $active-bg 50%, $filling-bg 50%) $to;
     background-size: 200%;
-    animation: $anim .4s;
+    animation: $name .4s;
+  }
+
+  @keyframes #{$name} {
+    100% {
+      background-position: $from;
+    }
   }
 }
 
@@ -126,12 +132,7 @@ $filling-bg: #e8eff8;
         justify-content: space-between;
         color: $icon;
 
-        @include loading($from: right, $to: left, $anim: loading);
-        @keyframes loading {
-          100% {
-            background-position: right;
-          }
-        }
+        @include loading($from: right, $to: left, $name: loader_1);
 
         .detailed {
           display: flex;
@@ -223,16 +224,7 @@ $filling-bg: #e8eff8;
         background: inherit;
       }
 
-      @include loading($from: left, $to: right, $anim: loader);
-      @keyframes loader {
-        100% {
-          background-position: left;
-        }
-      }
-
-      .mat-expansion-panel-body {
-        padding: 0;
-      }
+      @include loading($from: left, $to: right, $name: loader_2);
 
       p {
         margin: 0;
